@@ -1,0 +1,44 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+
+
+
+{% block navbar %}
+    {% include 'components/navbar.html' %}
+{% endblock navbar %}
+
+{% block main %}
+<main class="flex-shrink-0 bg-light">
+
+    <a class="text-decoration-none text-primary" href="{% url 'mylist' %}">назад</a>
+
+    <div class="px-4 py-5 my-5 text-center">
+    
+    <h1 class="display-5 fw-bold">{{ todo.title }}</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">{{ todo.description }}</p>
+    {% if todo.is_completed %}
+        <p class="text-success">задача: выполена</p>
+    {% else %}
+        <p class="text-danger">задача: не выполена</p>
+    {% endif %}
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a href="{% url 'updatetodo' todo.id %}" class="btn btn-primary btn-lg px-4 gap-3">Изменить</a>
+        <button type="button" class="btn btn-outline-secondary btn-lg px-4">удалить</button>
+
+          {% if todo.is_completed %}
+            Кнопку не видим!
+          {% else %}
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+          {% endif %}
+
+          {% for i in list %}
+            <div>{{i}}</div>
+          {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock main %}
