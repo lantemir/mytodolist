@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-+uz%tatblkulps32q8wy$+67h1(9xe03fbkj3ypv4_l-0l6c1g
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
@@ -135,14 +136,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # для локалки
 STATIC_URL = '/static/'
-
+STATIC_ROOT = Path(BASE_DIR / 'static') # для herocu добавил
+STATIC_DIR = Path(BASE_DIR / 'static') # для herocu добавил
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+
+
+# для herocu добавил начало
+STATICFILES_DIRS = [
+    Path(BASE_DIR / 'static_external'),
+]
+# для herocu добавил конец
+
+ # для локалки начало
+# STATICFILES_DIRS = (      
+#     os.path.join(BASE_DIR, 'static'),
+# )
+ # для локалки конец
+
+
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
