@@ -42,15 +42,30 @@
           <label for="floatingPassword">Введите описание задачи:</label>
         </div>
 
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">submit</button>
-        <button class="w-100 btn btn-lg btn-outline-danger" type="reset">reset</button>
-        <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
+        {% if todo.is_completed %}
+        <p class="text-success">задача выполена:  да</p>        
+        {% else %}
+        <p class="text-danger">задача выполнена:  нет</p>
+        {% endif %}
+
+
+        <a class="w-100 btn btn-lg btn-primary" href="{% url 'update_todolist_status' todo.id %}">переключить статус задачи</a>     
+
+       <br>
+       <br>
+
+      
+
+     
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Изменить</button>
+        
+       
       </form>
     </div>
 </main>
 {% endblock main %}
+
+
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}

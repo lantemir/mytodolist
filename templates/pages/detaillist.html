@@ -26,19 +26,13 @@
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <a href="{% url 'updatetodo' todo.id %}" class="btn btn-primary btn-lg px-4 gap-3">Изменить</a>
         <button type="button" class="btn btn-outline-secondary btn-lg px-4">удалить</button>
-
-          {% if todo.is_completed %}
-            Кнопку не видим!
-          {% else %}
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
-          {% endif %}
-
-          {% for i in list %}
-            <div>{{i}}</div>
-          {% endfor %}
-
       </div>
     </div>
   </div>
 </main>
 {% endblock main %}
+
+
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
