@@ -94,3 +94,8 @@ def update_todolist_status(request, todo_id):
         obj.is_completed = True
     obj.save()
     return redirect(reverse('mylist', args=()))
+
+def delete_todolist(request, todo_id):
+    obj = models.Task.objects.get(id=todo_id)
+    obj.delete()
+    return redirect(reverse('mylist', args=()))
