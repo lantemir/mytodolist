@@ -1,9 +1,4 @@
 
-from asyncio import tasks
-from audioop import reverse
-from multiprocessing import context
-from turtle import title
-from urllib import request
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from . import models
