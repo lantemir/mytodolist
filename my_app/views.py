@@ -1,9 +1,15 @@
 
+from csv import excel
+import json
+import requests # pip install requests
+from multiprocessing import context
+from urllib import response
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from . import models
 from django.urls import reverse # для перекидывание страницы reverse
 from . import utils #пагинатор
+
 
 
 
@@ -94,3 +100,37 @@ def delete_todolist(request, todo_id):
     obj = models.Task.objects.get(id=todo_id)
     obj.delete()
     return redirect(reverse('mylist', args=()))
+
+def get_vacancies(request):
+    context = {
+
+    }
+    if request.method == "POST":
+        vacancie = request.POST.get("vacancie", "Никто")
+        
+        params = {
+            'text': f'NAME:{vacancie}',
+            'area': 40,
+            'page': 1,
+            'per_page': 100
+        }
+
+        response = requests.get('https://api.hh.ru/vacancies', params)
+        json_data1 = json.loads(response.content.decode())
+
+        vacancies = json_data1["items"]
+
+        # for i in vacancies:
+        #     print(i)
+        #     print("\n\n")
+        
+        # print(f'длина: {len(vacancies)}')
+
+
+        
+
+        context ={
+            "vacancie": vacancie,
+            "vacancies": vacancies
+        }
+    return render(request, 'pages/vacanciespage.html', context)

@@ -10,5 +10,6 @@ urlpatterns = [
     path('updatetodo/<int:todo_id>/', views.updatetodo, name="updatetodo"),
     path('detailtodo/<int:todo_id>/', views.detailtodo, name="detailtodo"),
     path('update_todolist_status/<int:todo_id>/', views.update_todolist_status, name="update_todolist_status"),
-    path('delete_todolist/<int:todo_id>/', views.delete_todolist, name="delete_todolist")
+    path('delete_todolist/<int:todo_id>/', views.delete_todolist, name="delete_todolist"),
+    path('get_vacancies/', views.get_vacancies, name="get_vacancies"),
 ]

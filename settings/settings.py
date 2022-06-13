@@ -136,23 +136,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # для локалки
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # для локалки
 STATIC_URL = '/static/'
-STATIC_ROOT = Path(BASE_DIR / 'static') # для herocu добавил
-STATIC_DIR = Path(BASE_DIR / 'static') # для herocu добавил
+#STATIC_ROOT = Path(BASE_DIR / 'static') # для herocu добавил
+#STATIC_DIR = Path(BASE_DIR / 'static') # для herocu добавил
+
 # Extra places for collectstatic to find static files.
 
 
 # для herocu добавил начало
-STATICFILES_DIRS = [
-    Path(BASE_DIR / 'static_external'),
-]
+# STATICFILES_DIRS = [
+#     Path(BASE_DIR / 'static_external'),
+# ]
 # для herocu добавил конец
 
  # для локалки начало
-# STATICFILES_DIRS = (      
-#     os.path.join(BASE_DIR, 'static'),
-# )
+STATICFILES_DIRS = (      
+    os.path.join(BASE_DIR, 'static'),
+)
  # для локалки конец
 
 
