@@ -11,6 +11,11 @@ from django.urls import reverse # для перекидывание страни
 from . import utils #пагинатор
 
 
+import requests
+from bs4 import BeautifulSoup
+
+
+
 
 
 def index (request):
@@ -124,13 +129,60 @@ def get_vacancies(request):
         #     print(i)
         #     print("\n\n")
         
-        # print(f'длина: {len(vacancies)}')
-
-
-        
+        # print(f'длина: {len(vacancies)}')       
 
         context ={
             "vacancie": vacancie,
             "vacancies": vacancies
         }
     return render(request, 'pages/vacanciespage.html', context)
+
+def dollar_parser(request):
+
+   
+
+    url = "https://nationalbank.kz/ru/exchangerates/ezhednevnye-oficialnye-rynochnye-kursy-valyut"
+
+    headers = {
+    'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246"
+    }
+
+    response = requests.get(url=url, headers=headers)
+
+
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    allTr = soup.findAll("tr")
+  
+    arrfirst= []
+
+    for tr in allTr:       
+
+        firsttr = tr      
+        newtest = firsttr.text.split('class="text-left"')      
+        newtest3 = newtest[0].strip()       
+        newtest4 = newtest3.split('\n')     
+        arrfirst.append(newtest4)   
+
+    tenge = 0
+    for j in arrfirst:
+        if j[1] == 'USD / KZT':
+            tenge=float(j[2])
+
+    
+    rezult = 0
+
+    
+    # print (502000 / dollar)
+
+    if request.method == "POST":
+
+        dollar = request.POST.get("dollarinput")
+        rezult = int(dollar) *  tenge     
+        
+
+    context = {
+        "tenge": tenge, 
+        "rezult": rezult,        
+    }
+    return render(request, 'pages/parserdollar.html', context)

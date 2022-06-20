@@ -12,4 +12,5 @@ urlpatterns = [
     path('update_todolist_status/<int:todo_id>/', views.update_todolist_status, name="update_todolist_status"),
     path('delete_todolist/<int:todo_id>/', views.delete_todolist, name="delete_todolist"),
     path('get_vacancies/', views.get_vacancies, name="get_vacancies"),
+    path('dollar_parser/', views.dollar_parser, name="dollar_parser"),
 ]

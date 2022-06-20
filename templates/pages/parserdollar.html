@@ -1,0 +1,56 @@
+
+{% extends "components/base.html" %}
+
+{% load static %}
+{% load extras %}
+
+
+{% block navbar %}
+    {% include 'components/navbar.html' %}
+{% endblock navbar %}
+
+{% block main %}
+<main class="flex-shrink-0 bg-light">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="container-fluid">
+                <div class="text-center">
+                    <div class="col-lg-6 mx-auto">
+                        1 доллар: {{tenge}} тенге
+                       
+                    </div>
+                    <div class="container">
+                        <form 
+                            action="{% url 'dollar_parser' %}"
+                            method="POST"
+                            enctype="multipart/form-data"
+                            target="_self"
+                            class="row g-3">
+                            {% csrf_token %}
+                            
+                            <div class="col-auto">
+                              <label for="inputPassword2" class="visually-hidden">количество долларов</label>
+                              <input type="text" class="form-control" name="dollarinput" placeholder="количество долларов">
+                            </div>
+                            <div class="col-auto">
+                              <button type="submit" class="btn btn-primary mb-3">посчитать</button>
+                            </div>
+                            <div class="col-auto">
+                                <label for="staticEmail2" class="visually-hidden">тенге</label>                         
+                                <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="{{rezult}} тг">
+                            </div>
+                            <h2> {% comfort_number rezult %}</h2>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>   
+  
+{% endblock main %}
+
+
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
